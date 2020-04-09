@@ -11,8 +11,16 @@ class EventHub {
       this.cache[params] = []
     }
     this.cache[params].forEach(fn => {
-      fn()
+      fn(data)
     });
+  }
+  off(params:string,fn){
+    this.cache[params].forEach((ele,index) => {
+      if (ele === fn) {
+        this.cache[params].splice(index,1)
+      }
+    });
+    
   }
 }
 
