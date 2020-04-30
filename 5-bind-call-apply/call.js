@@ -53,7 +53,56 @@ Function.prototype.myBind = function() {
   };
 };
 
-const fn2 = () => {
-  console.log(this);
+/**
+ * 面试题：箭头函数被call，bind调用时
+ * 无法改变this指向
+ * @param {} params
+ */
+const fn2 = params => {
+  console.log(57, this);
+  console.log(58, params);
 };
-fn2();
+// fn2();
+fn2.call({ a: 1 }, 88);
+fn2.bind({ b: 1 }, 99);
+/**
+ * generator
+ * 一个generator看上去像一个函数，但可以返回多次
+ * generator和函数很像，书写形式上只有一个*的区别，
+ * generator：
+ * function* fn1(){}
+ * Function:
+ * function fn1(){}
+ */
+
+function* fn3(x) {
+  var n = 0;
+  while (n < x) {
+    yield n;
+    n++;
+  }
+}
+const fn4 = fn3(5);
+// console.log(fn4.next());
+// console.log(fn4.next());
+// console.log(fn4.next());
+// console.log(fn4.next());
+// console.log(fn4.next());
+// console.log(fn4.next());
+
+function* fn5() {
+  var n = 0;
+  while (n < 4) {
+    yield n;
+    n++;
+  }
+  return "ok";
+}
+
+const fn6 = fn5();
+
+console.log(fn6.next());
+console.log(fn6.next());
+console.log(fn6.next());
+console.log(fn6.next());
+console.log(fn6.next());
